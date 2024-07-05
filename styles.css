@@ -4,6 +4,7 @@ body {
   color: goldenrod;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
+
 .main-body {
   background-color: #0c0c0c;
   overflow-x: hidden;
@@ -94,18 +95,29 @@ body {
   color: white;
 }
 .recommendation {
-  max-width: 450px;
+  max-width: 110px;
   width: 100%;
   padding: 2rem 5rem;
   padding-left: 1rem;
   background-color: #1a1a1a;
   border-radius: 20px;
   background-size: cover;
+  margin-bottom: 1rem;
 
   & h1 {
-    text-shadow: 2px 2px 5px #1a1a1a;
+    text-shadow: 4px 4px 10px #1a1a1a;
   }
+}  
+.recommendation button img{
+  width: 20px;
+  height: 20px;
 }
+.recommendation button {
+  border: none;
+  background: transparent;
+}
+
+
 /* Quick search section */
 .quick-search {
   display: flex;
@@ -116,6 +128,7 @@ body {
 }
 .pick-category {
   padding: 1.5rem 2rem;
+  margin-bottom: 1rem;
   background-color: #1a1a1a;
   border-radius: 20px;
 }
