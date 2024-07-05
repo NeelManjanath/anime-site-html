@@ -17,12 +17,14 @@ body {
 }
 /* Top menu */
 .topmenu {
+  background-color:#1f1d1b;
+  border-radius: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  /* padding: 1rem; */
-  margin: 2rem;
+  padding: 1rem;
+  padding-inline: 3rem;
 }
 .search-section ul {
   list-style: none;
@@ -171,5 +173,9 @@ body {
     aspect-ratio: 1/1.4;
     object-fit: cover;
   }
+  & p{
+    font-size: 13px;
+  }
+  
 }
 

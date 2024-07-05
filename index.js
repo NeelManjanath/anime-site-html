@@ -54,7 +54,7 @@ async function getGenre() {
 }
 
 async function getAnimeData() {
-  const url = "https://api.jikan.moe/v4/top/anime";
+  const url = "https://api.jikan.moe/v4/top/anime?filter=bypopularity";
   const popularPicks = document.querySelector(".popular-picks");
   // let html = "";
   let data;
@@ -72,17 +72,20 @@ async function getAnimeData() {
   }
 
   data.forEach((item) => {
-    popularPicks.innerHTML += `  <div class="pick">
+    popularPicks.innerHTML += `  <div class="pick" onclick="newPage(${item.mal_id})">
             <img src="${item.images.webp.large_image_url}" />
             
               <h2>${item.title_english}</h2>
-              <p>About Title</p>
+              <p>See Title</p>
           
           </div>`;
   });
-
-  // popularPicks.innerHTML = html;
 }
+
+function newPage(id){
+  window.open(`animeDetails.html?id=${id}`, `_self`);
+}
+
 getGenre();
 getAnimeData();
 getRecommendation();
