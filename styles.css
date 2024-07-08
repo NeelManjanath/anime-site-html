@@ -204,6 +204,7 @@ button {
 .pick {
   max-width: 160px;
   width: 100%;
+  cursor: pointer;
   & img {
     border-radius: 20px;
     max-width: 160px;
