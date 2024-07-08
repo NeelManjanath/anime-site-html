@@ -3,7 +3,6 @@ body {
   color: goldenrod;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-
 .main-body {
   background-color: #0c0c0c;
   overflow-x: hidden;
@@ -14,9 +13,12 @@ body {
   border-radius: 20px;
   box-shadow: 10px 10px 150px 5px #1f1d1b;
 }
+button {
+  cursor: pointer;
+}
 /* Top menu */
 .topmenu {
-  background-color:#1f1d1b;
+  background-color: #1f1d1b;
   border-radius: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -74,7 +76,8 @@ body {
     brightness(107%) contrast(105%);
 }
 .account svg {
-  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(241deg) brightness(103%) contrast(103%);
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(241deg)
+    brightness(103%) contrast(103%);
 }
 .settings ul {
   list-style: none;
@@ -93,7 +96,7 @@ body {
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin: 2rem;
-  color: white;
+  color: snow;
 }
 .recommendation {
   max-width: 110px;
@@ -108,8 +111,8 @@ body {
   & h1 {
     text-shadow: 4px 4px 10px #1a1a1a;
   }
-}  
-.recommendation button img{
+}
+.recommendation button img {
   width: 20px;
   height: 20px;
 }
@@ -118,24 +121,56 @@ body {
   background: transparent;
 }
 
-
 /* Quick search section */
+
 .quick-search {
-  display: flex;
-  justify-content: space-between;
-  width: auto;
-  flex-wrap: wrap;
-  margin: 2rem;
+  margin: 2rem 2rem 0 2rem;
 }
-.pick-category {
-  padding: 1.5rem 2rem;
-  margin-bottom: 1rem;
+.quick-search input {
+  border-style: none;
+  padding: 1rem;
+  border-radius: 2px 2px 2px 2px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  background-color: #212121;
+  color: snow;
+}
+.category-wrapper {
+  display: inline-block;
+  position: relative;
+}
+.category-button {
+  border-style: none;
+  background-color: #c18732;
+  padding: 1rem;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  border-radius: 2px 2px 2px 2px;
+  color: #1a1a1a;
+}
+.category-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: absolute;
+  width: 100%;
+}
+
+.category-list li {
+  border: 1px solid #303030;
+  border-top: none;
   background-color: #1a1a1a;
-  border-radius: 20px;
+  color: snow;
+  padding: 0.5rem;
 }
+.category-list li:hover {
+  background-color: #303030;
+}
+
 /* Popular picks section */
 .popular {
-  margin: 2rem;
+  margin: 0.5rem 2rem 2rem 2rem;
 }
 .popular-bar {
   display: flex;
@@ -144,6 +179,9 @@ body {
     list-style: none;
     display: flex;
     gap: 5px;
+  }
+  & span {
+    color: snow;
   }
 }
 .popular-bar img {
@@ -172,9 +210,7 @@ body {
     aspect-ratio: 1/1.4;
     object-fit: cover;
   }
-  & p{
+  & p {
     font-size: 13px;
   }
-  
 }
-

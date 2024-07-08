@@ -9,9 +9,7 @@ async function getRecommendation() {
     }
     const json = await reponse.json();
     let data = json.data;
-    newData = data.slice(0,10);
-    console.log(newData);
-    // console.log(recommendations);
+    newData = data.slice(0, 10);
   } catch (error) {
     console.error(error.message);
   }
@@ -28,43 +26,69 @@ async function getRecommendation() {
   });
 }
 
-async function getGenre() {
+let genreArr = [];
+
+async function getGenres() {
   const url = "https://api.jikan.moe/v4/genres/anime";
-  const categories = document.querySelector(".quick-search");
-  let newData;
+
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     const json = await response.json();
-    data = json.data;
-    newData = data.slice(0, 16);
-    // console.log(newData);
+    genreArr = json.data;
+    console.log(genreArr);
   } catch (error) {
     console.error(error.message);
   }
+}
 
-  newData.forEach((item) => {
-    categories.innerHTML += `
-    <div class="pick-category">${item.name}</div>`;
+const inputEl = document.getElementById("category-input");
+inputEl.addEventListener("input", onInputText);
+
+function onInputText(e) {
+  const value = e.target.value.toLowerCase();
+  let filteredGenres = [];
+
+  if (value.length === 0) {
+    return createGenreDropDown(filteredGenres);
+  }
+
+  genreArr.forEach((item) => {
+    if (item.name.substr(0, value.length).toLowerCase() === value)
+      filteredGenres.push(item.name);
   });
+  createGenreDropDown(filteredGenres);
+}
+
+function createGenreDropDown(list) {
+  let html = "";
+  const genrelist = document.querySelector(".category-list");
+  list.forEach((item) => {
+    html += `
+    <li onclick="autoComplete('${item}')">${item}</li>`;
+  });
+  genrelist.innerHTML = html;
+}
+
+function autoComplete(category) {
+  inputEl.value = category;
 }
 
 async function getAnimeData() {
+  let loading = true;
   const url = "https://api.jikan.moe/v4/top/anime?filter=bypopularity";
   const popularPicks = document.querySelector(".popular-picks");
-  // let html = "";
   let data;
   try {
     const response = await fetch(url);
-    // console.log(response);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     const json = await response.json();
     data = json.data;
-    // console.log(data);
+    loading = false;
   } catch (error) {
     console.error(error.message);
   }
@@ -80,10 +104,64 @@ async function getAnimeData() {
   });
 }
 
-function newPage(id){
+function newPage(id) {
   window.open(`animeDetails.html?id=${id}`, `_self`);
 }
 
-getGenre();
+async function findGenreID() {
+  console.log(inputEl.value);
+  const genre = genreArr.find((item) => {
+    return item.name === inputEl.value;
+  });
+  updateTitles(genre.mal_id);
+  return;
+  // const url = "https://api.jikan.moe/v4/genres/anime"
+  // let genreID;
+  // try {
+  //   const response = await fetch(url);
+  //   if (!response.ok) {
+  //     throw new Error(`Response status: ${response.status}`);
+  //   }
+  //   const json = await response.json();
+  //   data = json.data;
+  // } catch (error) {
+  //   console.error(error.message);
+  // }
+  // data.forEach((item)=>{
+  //   if (item.name === inputEl.value){
+  //     genreID = item.mal_id;
+  //   }
+  // })
+  updateTitles(genreID);
+}
+
+async function updateTitles(genreID) {
+  const url = `https://api.jikan.moe/v4/anime?genres=${genreID}`;
+  let html = "";
+  let data;
+  const newTitles = document.querySelector(".popular-picks");
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const json = await response.json();
+    data = json.data;
+  } catch (error) {
+    console.error(error.message);
+  }
+  data.forEach((item) => {
+    html += `<div class="pick" onclick="newPage(${item.mal_id})">
+            <img src="${item.images.webp.large_image_url}" />
+            
+              <h2>${item.title}</h2>
+              <p>See Title</p>
+          
+          </div>`;
+  });
+  newTitles.innerHTML = html;
+}
+getGenres();
 getAnimeData();
 getRecommendation();

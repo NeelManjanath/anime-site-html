@@ -66,13 +66,28 @@
       </section>
       <!-- Quick search for categories -->
       <section class="quick-search wrapper">
-        <div class="pick-category">Popular Titles</div>
-        <!-- contents in JS -->
+        <!-- <div class="pick-category">Popular Titles</div> -->
+
+        <form action="" autocomplete="off">
+          <div class="category-wrapper">
+            <input
+              id="category-input"
+              type="text"
+              placeholder="Select Category"
+            />
+            <ul class="category-list">
+              <!-- dynamic content in JS -->
+            </ul>
+          </div>
+          <button type="button" class="category-button" onclick="findGenreID()">
+            Select
+          </button>
+        </form>
       </section>
       <!-- Popular Picks -->
       <section class="popular wrapper">
         <div class="popular-bar">
-          <h3>Popular Titles</h3>
+          <h3>Showing <span>Popular Titles</span></h3>
           <ul>
             <li>
               <button id="sort">
@@ -87,7 +102,8 @@
               </button>
             </li>
           </ul>
-        </div><br>
+        </div>
+        <br />
         <div class="popular-picks"></div>
       </section>
     </div>

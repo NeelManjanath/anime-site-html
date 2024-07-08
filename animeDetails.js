@@ -1,31 +1,28 @@
-function getID(){
-    let params = new URL(document.location).searchParams;
-    return params.get("id")
-    
+function getID() {
+  let params = new URL(document.location).searchParams;
+  return params.get("id");
 }
 
+async function getAnimeDetails() {
+  const id = getID();
+  const url = `https://api.jikan.moe/v4/anime/${id}`;
+  const titlemain = document.querySelector(".title-main");
+  // console.log(titlemain);
+  let data;
+  try {
+    const response = await fetch(url);
+    // console.log(response);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const json = await response.json();
+    data = json.data;
+    console.log(data);
+  } catch (error) {
+    console.error(error.message);
+  }
 
-async function getAnimeDetails(){
-    const id = getID();
-    const url = `https://api.jikan.moe/v4/anime/${id}`;
-    const titlemain = document.querySelector('.title-main');
-    // console.log(titlemain);
-    let data;
-    try {
-        const response = await fetch(url);
-        // console.log(response);
-        if (!response.ok) {
-          throw new Error(`Response status: ${response.status}`);
-        }
-        const json = await response.json();
-        data = json.data;
-        console.log(data);
-      } catch (error) {
-        console.error(error.message);
-      }
-
-      
-    titlemain.innerHTML += `
+  titlemain.innerHTML += `
         <div class="title-poster">
           <img src="${data.images.webp.large_image_url}" />
         </div>
@@ -50,8 +47,6 @@ async function getAnimeDetails(){
           </div>
         </div>
         `;
-
 }
-
 
 getAnimeDetails();
