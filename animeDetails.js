@@ -9,7 +9,7 @@ async function getAnimeDetails(){
     const id = getID();
     const url = `https://api.jikan.moe/v4/anime/${id}`;
     const titlemain = document.querySelector('.title-main');
-    console.log(titlemain);
+    // console.log(titlemain);
     let data;
     try {
         const response = await fetch(url);
@@ -30,17 +30,17 @@ async function getAnimeDetails(){
           <img src="${data.images.webp.large_image_url}" />
         </div>
         <div class="title-details">
-          <h6>${data.type} | ${data.year}</h6>
-          <h1>${data.title_english}</h1>
+          <h5>${data.type} | ${data.year}</h5>
+          <h1>${data.title_english} (${data.title})</h1>
           <ul>
-            <li><h4>Ranking</h4> <span>${data.rank}</span></li>
-            <li><h4>Popularity</h4> <span>${data.popularity}</span></li>
+            <li><h4>Ranking</h4> <span>#${data.rank}  [${data.score}/10]</span></li>
+            <li><h4>Popularity</h4> <span>#${data.popularity}</span></li>
             <li><h4>Rating</h4> <span>${data.rating}</span></li>
           </ul>
           <div>
             <p>
-              ${data.synopsis}
-            </p>
+                ${data.synopsis}
+            </p><br>
           </div>
           <div class="trailer">
             <iframe

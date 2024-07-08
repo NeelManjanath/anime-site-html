@@ -9,7 +9,7 @@ async function getRecommendation() {
     }
     const json = await reponse.json();
     let data = json.data;
-    newData = data.slice(115,125);
+    newData = data.slice(0,10);
     console.log(newData);
     // console.log(recommendations);
   } catch (error) {
@@ -19,9 +19,7 @@ async function getRecommendation() {
   newData.forEach((item) => {
     recommendations.innerHTML += `<div
           class="recommendation"
-          style="
-            background-image: url(${item.entry.images.webp.large_image_url})"
-        >
+          style="background-image: url(${item.entry.images.webp.large_image_url})" onclick="newPage(${item.entry.mal_id})">
           <h1>${item.entry.title}</h1>
           <p>
             <button><img src="https://www.svgrepo.com/show/6905/play-button.svg"></button>
@@ -41,7 +39,7 @@ async function getGenre() {
     }
     const json = await response.json();
     data = json.data;
-    newData = data.slice(0, 10);
+    newData = data.slice(0, 16);
     // console.log(newData);
   } catch (error) {
     console.error(error.message);
