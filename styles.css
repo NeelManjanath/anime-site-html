@@ -8,7 +8,8 @@ body {
   overflow-x: hidden;
   max-width: 1200px;
   width: auto;
-  /* height: 100vh; */
+  /* height: 100vh;
+  overflow-y: hidden; */
   margin: 0 auto;
   border-radius: 20px;
   box-shadow: 10px 10px 150px 5px #1f1d1b;
@@ -38,6 +39,9 @@ button {
   align-items: center;
   padding: 1rem;
   padding-inline: 3rem;
+}
+.logo span{
+  font-weight: 800;
 }
 .search-section ul {
   list-style: none;
@@ -222,7 +226,8 @@ button {
     font-size: 13px;
   }
   & h2 {
-    color:#c18732
+    color:#c18732;
+    font-size: 21px;
   }
   & h2:hover{
     color: #eca63d;
