@@ -1,7 +1,7 @@
 body {
   background: linear-gradient(to bottom, #1f1d1b, #c18732);
   color: goldenrod;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .main-body {
   background-color: #0c0c0c;
@@ -13,9 +13,21 @@ body {
   border-radius: 20px;
   box-shadow: 10px 10px 150px 5px #1f1d1b;
 }
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  background-color: #0c0c0c;
+}
+.loader svg {
+  width: 100%;
+  max-width: 150px;
+}
 button {
   cursor: pointer;
 }
+
 /* Top menu */
 .topmenu {
   background-color: #1f1d1b;
@@ -92,45 +104,38 @@ button {
 }
 /* Recommendations */
 .recommendations-viewer {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin: 2rem;
   color: snow;
 }
+
 .recommendation {
   max-width: 110px;
   width: 100%;
   padding: 2rem 5rem;
   padding-left: 1rem;
-  background-color: #1a1a1a;
-  border-radius: 20px;
-  background-size: cover;
+  border-radius: 5px;
+  background: cover;
   margin-bottom: 1rem;
-
+  cursor: pointer;
   & h1 {
     text-shadow: 4px 4px 10px #1a1a1a;
   }
 }
-.recommendation button img {
-  width: 20px;
-  height: 20px;
-}
-.recommendation button {
-  border: none;
-  background: transparent;
-}
+
 
 /* Quick search section */
 
 .quick-search {
-  margin: 2rem 2rem 0 2rem;
+  margin: 2rem 2rem 0 3rem;
 }
 .quick-search input {
   border-style: none;
   padding: 1rem;
   border-radius: 2px 2px 2px 2px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   background-color: #212121;
   color: snow;
@@ -144,7 +149,7 @@ button {
   background-color: #c18732;
   padding: 1rem;
   cursor: pointer;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   border-radius: 2px 2px 2px 2px;
   color: #1a1a1a;
@@ -175,6 +180,7 @@ button {
 .popular-bar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   & ul {
     list-style: none;
     display: flex;
@@ -188,15 +194,16 @@ button {
   width: 20px;
   height: 20px;
 }
-.popular-bar button {
-  border: none;
-  background-color: transparent;
-  filter: invert(93%) sepia(0%) saturate(7474%) hue-rotate(30deg)
-    brightness(107%) contrast(105%);
+.popular-bar li{
+  cursor: pointer;
+  font-size: 13px;
+}
+.popular-bar li:hover {
+  text-decoration:underline;
 }
 
 .popular-picks {
-  display: flex;
+  display: none;
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 1rem;
@@ -206,12 +213,18 @@ button {
   width: 100%;
   cursor: pointer;
   & img {
-    border-radius: 20px;
+    border-radius: 10px;
     max-width: 160px;
     aspect-ratio: 1/1.4;
     object-fit: cover;
   }
   & p {
     font-size: 13px;
+  }
+  & h2 {
+    color:#c18732
+  }
+  & h2:hover{
+    color: #eca63d;
   }
 }

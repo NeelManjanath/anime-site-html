@@ -12,7 +12,7 @@
   aspect-ratio: 1/1.4;
 }
 .title-details {
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
   padding: 2rem;
   padding-top: 0;
@@ -28,6 +28,9 @@
 .title-details p {
   text-indent: 40px;
   color: snow;
+  opacity: 0.9;
+  line-height: 25px;
+  margin-top: 2rem;
 }
 .title-details h4 {
   margin: 0;
@@ -43,7 +46,7 @@
   justify-content: space-between;
 }
 .trailer iframe {
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
   min-height: 200px;
 }

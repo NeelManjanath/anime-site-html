@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anime Website</title>
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Poppins"
+    />
   </head>
   <body>
     <div class="main-body">
@@ -61,9 +65,67 @@
         </div>
       </div>
       <!-- Recommendations -->
-      <section class="recommendations-viewer wrapper">
-        <!-- contents in JS -->
-      </section>
+      <div class="loader">
+        <svg class="recommendation-loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+          <circle
+            fill="#4D4843"
+            stroke="#4D4843"
+            stroke-width="15"
+            r="15"
+            cx="40"
+            cy="65"
+          >
+            <animate
+              attributeName="cy"
+              calcMode="spline"
+              dur="1.3"
+              values="65;135;65;"
+              keySplines=".5 0 .5 1;.5 0 .5 1"
+              repeatCount="indefinite"
+              begin="-.4"
+            ></animate>
+          </circle>
+          <circle
+            fill="#4D4843"
+            stroke="#4D4843"
+            stroke-width="15"
+            r="15"
+            cx="100"
+            cy="65"
+          >
+            <animate
+              attributeName="cy"
+              calcMode="spline"
+              dur="1.3"
+              values="65;135;65;"
+              keySplines=".5 0 .5 1;.5 0 .5 1"
+              repeatCount="indefinite"
+              begin="-.2"
+            ></animate>
+          </circle>
+          <circle
+            fill="#4D4843"
+            stroke="#4D4843"
+            stroke-width="15"
+            r="15"
+            cx="160"
+            cy="65"
+          >
+            <animate
+              attributeName="cy"
+              calcMode="spline"
+              dur="1.3"
+              values="65;135;65;"
+              keySplines=".5 0 .5 1;.5 0 .5 1"
+              repeatCount="indefinite"
+              begin="0"
+            ></animate>
+          </circle>
+        </svg>
+        <section class="recommendations-viewer wrapper">
+          <!-- contents in JS -->
+        </section>
+      </div>
       <!-- Quick search for categories -->
       <section class="quick-search wrapper">
         <!-- <div class="pick-category">Popular Titles</div> -->
@@ -87,24 +149,78 @@
       <!-- Popular Picks -->
       <section class="popular wrapper">
         <div class="popular-bar">
-          <h3>Showing <span>Popular Titles</span></h3>
+          <h3 id="category-title">Showing <span>Popular Titles</span></h3>
           <ul>
             <li>
-              <button id="sort">
-                <img src="https://www.svgrepo.com/show/372672/sort-by.svg" />
-              </button>
-            </li>
-            <li>
-              <button id="filter">
-                <img
-                  src="https://www.svgrepo.com/show/124319/filter-filled-tool-symbol.svg"
-                />
-              </button>
+              <a id="back-to-popular" onclick="getAnimeData()">
+                Return to Popular Titles
+              </a>
             </li>
           </ul>
         </div>
         <br />
-        <div class="popular-picks"></div>
+
+        <div class="loader">
+          <svg class="picks-loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+            <circle
+              fill="#4D4843"
+              stroke="#4D4843"
+              stroke-width="15"
+              r="15"
+              cx="40"
+              cy="65"
+            >
+              <animate
+                attributeName="cy"
+                calcMode="spline"
+                dur="1.3"
+                values="65;135;65;"
+                keySplines=".5 0 .5 1;.5 0 .5 1"
+                repeatCount="indefinite"
+                begin="-.4"
+              ></animate>
+            </circle>
+            <circle
+              fill="#4D4843"
+              stroke="#4D4843"
+              stroke-width="15"
+              r="15"
+              cx="100"
+              cy="65"
+            >
+              <animate
+                attributeName="cy"
+                calcMode="spline"
+                dur="1.3"
+                values="65;135;65;"
+                keySplines=".5 0 .5 1;.5 0 .5 1"
+                repeatCount="indefinite"
+                begin="-.2"
+              ></animate>
+            </circle>
+            <circle
+              fill="#4D4843"
+              stroke="#4D4843"
+              stroke-width="15"
+              r="15"
+              cx="160"
+              cy="65"
+            >
+              <animate
+                attributeName="cy"
+                calcMode="spline"
+                dur="1.3"
+                values="65;135;65;"
+                keySplines=".5 0 .5 1;.5 0 .5 1"
+                repeatCount="indefinite"
+                begin="0"
+              ></animate>
+            </circle>
+          </svg>
+          <div class="popular-picks">
+            <!-- dynamic content in JS -->
+          </div>
+        </div>
       </section>
     </div>
     <script src="index.js"></script>

@@ -1,6 +1,13 @@
+const genrelist = document.querySelector(".category-list");
+const picksLoader = document.querySelector(".picks-loader") 
+// used in getAnimeData() and updateTitles()
+
 async function getRecommendation() {
   const url = "https://api.jikan.moe/v4/anime/1/recommendations";
   const recommendations = document.querySelector(".recommendations-viewer");
+  const recommendationLoader = document.querySelector(".recommendation-loader")
+  recommendationLoader.style.display = "flex";
+  recommendations.style.display = "none"
   let newData;
   try {
     const reponse = await fetch(url);
@@ -9,7 +16,7 @@ async function getRecommendation() {
     }
     const json = await reponse.json();
     let data = json.data;
-    newData = data.slice(0, 10);
+    newData = data.slice(55,65);
   } catch (error) {
     console.error(error.message);
   }
@@ -17,13 +24,12 @@ async function getRecommendation() {
   newData.forEach((item) => {
     recommendations.innerHTML += `<div
           class="recommendation"
-          style="background-image: url(${item.entry.images.webp.large_image_url})" onclick="newPage(${item.entry.mal_id})">
+          style="background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.6)), url('${item.entry.images.webp.large_image_url}')" onclick="newPage(${item.entry.mal_id})">
           <h1>${item.entry.title}</h1>
-          <p>
-            <button><img src="https://www.svgrepo.com/show/6905/play-button.svg"></button>
-          </p>
         </div>`;
   });
+  recommendationLoader.style.display = "none";
+  recommendations.style.display = "flex"
 }
 
 let genreArr = [];
@@ -64,7 +70,7 @@ function onInputText(e) {
 
 function createGenreDropDown(list) {
   let html = "";
-  const genrelist = document.querySelector(".category-list");
+  genrelist.style.display = 'block';
   list.forEach((item) => {
     html += `
     <li onclick="autoComplete('${item}')">${item}</li>`;
@@ -77,9 +83,14 @@ function autoComplete(category) {
 }
 
 async function getAnimeData() {
-  let loading = true;
   const url = "https://api.jikan.moe/v4/top/anime?filter=bypopularity";
   const popularPicks = document.querySelector(".popular-picks");
+  const titleName = document.querySelector("#category-title span");
+
+  popularPicks.style.display = "none"
+  picksLoader.style.display = "flex"
+  
+  let html = "";
   let data;
   try {
     const response = await fetch(url);
@@ -88,13 +99,12 @@ async function getAnimeData() {
     }
     const json = await response.json();
     data = json.data;
-    loading = false;
   } catch (error) {
     console.error(error.message);
   }
-
+  titleName.innerHTML = `Popular Titles`;
   data.forEach((item) => {
-    popularPicks.innerHTML += `  <div class="pick" onclick="newPage(${item.mal_id})">
+    html += `  <div class="pick" onclick="newPage(${item.mal_id})">
             <img src="${item.images.webp.large_image_url}" />
             
               <h2>${item.title_english}</h2>
@@ -102,6 +112,9 @@ async function getAnimeData() {
           
           </div>`;
   });
+  popularPicks.innerHTML = html;
+  popularPicks.style.display = "flex"
+  picksLoader.style.display = "none"
 }
 
 function newPage(id) {
@@ -109,38 +122,21 @@ function newPage(id) {
 }
 
 async function findGenreID() {
-  console.log(inputEl.value);
   const genre = genreArr.find((item) => {
-    return item.name === inputEl.value;
+    return item.name.toLowerCase() === inputEl.value.toLowerCase();
   });
-  updateTitles(genre.mal_id);
+  updateTitles(genre.mal_id, genre.name);
   return;
-  // const url = "https://api.jikan.moe/v4/genres/anime"
-  // let genreID;
-  // try {
-  //   const response = await fetch(url);
-  //   if (!response.ok) {
-  //     throw new Error(`Response status: ${response.status}`);
-  //   }
-  //   const json = await response.json();
-  //   data = json.data;
-  // } catch (error) {
-  //   console.error(error.message);
-  // }
-  // data.forEach((item)=>{
-  //   if (item.name === inputEl.value){
-  //     genreID = item.mal_id;
-  //   }
-  // })
-  updateTitles(genreID);
 }
 
-async function updateTitles(genreID) {
+async function updateTitles(genreID, genreName) {
   const url = `https://api.jikan.moe/v4/anime?genres=${genreID}`;
   let html = "";
   let data;
   const newTitles = document.querySelector(".popular-picks");
-
+  const titleName = document.querySelector("#category-title span");
+  newTitles.style.display = "none"
+  picksLoader.style.display = "flex"
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -151,6 +147,7 @@ async function updateTitles(genreID) {
   } catch (error) {
     console.error(error.message);
   }
+  titleName.innerHTML = `${genreName} Titles`;
   data.forEach((item) => {
     html += `<div class="pick" onclick="newPage(${item.mal_id})">
             <img src="${item.images.webp.large_image_url}" />
@@ -161,7 +158,12 @@ async function updateTitles(genreID) {
           </div>`;
   });
   newTitles.innerHTML = html;
+  inputEl.value = "";
+  genrelist.style.display = 'none'
+  newTitles.style.display = "flex"
+  picksLoader.style.display = "none"
 }
+
 getGenres();
-getAnimeData();
 getRecommendation();
+getAnimeData();

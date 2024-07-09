@@ -7,6 +7,9 @@ async function getAnimeDetails() {
   const id = getID();
   const url = `https://api.jikan.moe/v4/anime/${id}`;
   const titlemain = document.querySelector(".title-main");
+  const titleLoader = document.querySelector(".title-loader")
+  titleLoader.style.display = "flex";
+  titlemain.style.display = "none";
   // console.log(titlemain);
   let data;
   try {
@@ -47,6 +50,8 @@ async function getAnimeDetails() {
           </div>
         </div>
         `;
+  titleLoader.style.display = "none";
+  titlemain.style.display = "flex"
 }
 
 getAnimeDetails();
